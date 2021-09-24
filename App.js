@@ -9,12 +9,9 @@
 import React, { useState, useReducer } from 'react'
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
-  useWindowDimensions,
   View,
   Pressable
 } from 'react-native'
@@ -92,15 +89,19 @@ const App = () => {
     <SafeAreaView style={styles.root}>
       <StatusBar barStyle={'dark-content'} />
       <Text style = {styles.titleText}>Memory Game</Text>
-      <View style = {styles.container}>
+      <View style = {[styles.row, styles.mainPadding]}>
+        <Text style = {styles.topRowText}>Attempts: {attempts}</Text>
+        <Text style = {styles.topRowText}>Matches: {completed}</Text>
+      </View>
+      <View style = {[styles.container, styles.mainPadding]}>
         {Object.keys(state).map(el => <Card key = {el} item = {state[el]} handlePress = {handlePress} />)}
       </View>
-      <Text>Completed: {completed}</Text>
-      <Text>Attempts: {attempts}</Text>
-      {completed === COUNT && 
-      <Pressable onPress = {resetGame}>
-        <Text>Reset</Text>
-      </Pressable>}
+      <View style = {styles.bottomContainer}>
+        {completed === COUNT && <Text style = {styles.congratsText}>Congratulations! You completed the game in {completed} moves!</Text>}
+        <Pressable style = {styles.button} onPress = {resetGame}>
+          <Text style = {styles.buttonText}>Reset</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 };
@@ -110,17 +111,52 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20
   },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 15
+  },
+  mainPadding: {
+    paddingHorizontal: 16
+  },
   container: {
     flexDirection: 'row',
     flexWrap: "wrap",
     justifyContent: "space-between",
-    paddingHorizontal: 16,
     marginVertical: 20
+  },
+  topRowText: {
+    fontSize: 16,
+    color: "green",
+    fontWeight: "bold"
   },
   titleText: {
     color: "gray",
     fontSize: 24,
     textAlign: "center"
+  },
+  button: {
+    backgroundColor: "#27ae60",
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    borderRadius: 8
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16
+  },
+  congratsText: {
+    color: "#9b59b6",
+    textAlign: "center",
+    fontSize: 20,
+    marginVertical: 5,
+    width: "70%",
+    fontWeight: "bold",
+  },
+  bottomContainer: {
+    width: "75%",
+    alignItems: "center",
+    alignSelf: "center"
   }
 })
 
