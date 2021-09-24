@@ -97,7 +97,7 @@ const App = () => {
         {Object.keys(state).map(el => <Card key = {el} item = {state[el]} handlePress = {handlePress} />)}
       </View>
       <View style = {styles.bottomContainer}>
-        {completed === COUNT && <Text style = {styles.congratsText}>Congratulations! You completed the game in {completed} moves!</Text>}
+        {completed === COUNT && <Text style = {styles.congratsText}>Congratulations! You completed the game in {attempts} moves!</Text>}
         <Pressable style = {styles.button} onPress = {resetGame}>
           <Text style = {styles.buttonText}>Reset</Text>
         </Pressable>
