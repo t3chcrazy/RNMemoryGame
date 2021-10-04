@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef, useLayoutEffect } from 'react'
 import { Pressable, Text, StyleSheet, Dimensions, Animated, Easing } from 'react-native'
 
 const { Value, timing } = Animated
@@ -18,7 +18,7 @@ export default function Card({ item, handlePress }) {
     const { value, shown, completed } = item
     const progress = useRef(new Value(0)).current
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (shown) {
             timing(progress, {
                 toValue: 1,
